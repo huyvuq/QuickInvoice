@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Square OAuth Redirect</title>
+    <script>
+        // Get the authorization code from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const state = urlParams.get('state');
+        
+        // Build the redirect URL to your app
+        let redirectUrl = 'quickinvoice://square-callback';
+        
+        // Add parameters
+        if (code) {
+            redirectUrl += `?code=${encodeURIComponent(code)}`;
+            if (state) {
+                redirectUrl += `&state=${encodeURIComponent(state)}`;
+            }
+        }
+        
+        // Redirect to the app
+        window.location.href = redirectUrl;
+    </script>
+</head>
+<body>
+    <h3>Redirecting to Quick Invoice...</h3>
+    <p>If you're not automatically redirected, please close this window and return to the app.</p>
+</body>
+</html>
